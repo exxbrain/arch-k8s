@@ -1,0 +1,112 @@
+{
+  "version": 2,
+  "name": "KrakenD on k8s",
+  "port": 8080,
+  "cache_ttl": "3600s",
+  "timeout": "3s",
+  "host": [
+    "http://krakend-service"
+  ],
+  "extra_config": {
+    "github_com/devopsfaith/krakend-gologging": {
+      "level": "DEBUG",
+      "prefix": "[KRAKEND]",
+      "syslog": false,
+      "stdout": true
+    }
+  },
+  "endpoints": [
+    {
+      "endpoint": "/auth/admin/token",
+      "method": "POST",
+      "backend": [
+        {
+          "url_pattern": "/auth/realms/master/protocol/openid-connect/token",
+          "method": "POST",
+          "host": [
+            "http://keycloak-http"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/auth/token",
+      "method": "POST",
+      "backend": [
+        {
+          "url_pattern": "/auth/realms/arch/protocol/openid-connect/token",
+          "method": "POST",
+          "host": [
+            "http://keycloak-http"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/auth/.wellknown/jwks.json",
+      "method": "GET",
+      "backend": [
+        {
+          "url_pattern": "/auth/realms/arch/protocol/openid-connect/certs",
+          "method": "GET",
+          "host": [
+            "http://keycloak-http"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/auth/logout",
+      "method": "POST",
+      "backend": [
+        {
+          "url_pattern": "/auth/realms/arch/",
+          "method": "POST",
+          "host": [
+            "http://keycloak-http"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/auth/register",
+      "method": "POST",
+      "output_encoding": "no-op",
+      "headers_to_pass": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/auth/admin/realms/arch/users",
+          "method": "POST",
+          "encoding": "no-op",
+          "host": [
+            "http://keycloak-http"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/profile/{param1}",
+      "headers_to_pass": [
+        "*"
+      ],
+      "extra_config": {
+        "github.com/devopsfaith/krakend-jose/validator": {
+          "alg": "RS256",
+          "jwk-url": "http://keycloak-http/auth/realms/master/protocol/openid-connect/certs",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/{param1}",
+          "host": [
+            "http://profile-service.app.svc.cluster.local:8080"
+          ]
+        }
+      ]
+    }
+  ]
+}

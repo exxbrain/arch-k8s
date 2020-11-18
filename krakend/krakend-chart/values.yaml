@@ -1,0 +1,21 @@
+replicaCount: 1
+
+fullnameOverride: "krakend"
+
+image:
+  name: exxbrain/arch-krakend
+  pullPolicy: Never
+
+service:
+  type: NodePort
+  port: 8080
+
+ingress:
+  enabled: true
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  hosts:
+    - host: arch.homework
+      paths: [
+          "/otusapp/dzakharov($|/)(.*)"
+      ]

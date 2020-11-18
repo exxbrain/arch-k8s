@@ -1,0 +1,161 @@
+openapi: 3.0.0
+info:
+  title: Backend for frontends. Apigateway.
+  description: Homework for backend for frontends. Apigateway.
+  version: 1.0.0
+servers:
+  - url: 'http://arch.homework'
+paths:
+  /otusapp/dzakharov/auth/admin/token:
+    post:
+      tags:
+        - auth
+      summary: Get admin token
+      requestBody:
+        description: Admin token
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRequest'
+            examples:
+              AdminToken:
+                value:
+                  username: admin
+                  password: admin
+                  lastName: Denisov
+                  email: archpe@1tr3221.com
+                  enabled: true
+                  credentials:
+                    - type: password
+                      value: password
+                      temporary: false
+      responses:
+        '201':
+          description: Created
+        '401':
+          description: Not authenticated
+  /otusapp/dzakharov/auth/register:
+    post:
+      tags:
+        - auth
+      summary: Create new user
+      security:
+        - adminAuth:
+          - profile
+          - email
+      requestBody:
+        description: User to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+            examples:
+              Denis:
+                value:
+                  username: arch15131434
+                  firstName: Denis
+                  lastName: Denisov
+                  email: archpe@1tr3221.com
+                  enabled: true
+                  credentials:
+                    - type: password
+                      value: password
+                      temporary: false
+      responses:
+        '201':
+          description: Created
+        '401':
+          description: Not authenticated
+  /otusapp/dzakharov/me:
+    get:
+      tags:
+        - auth
+      summary: Get my profile
+      security:
+        - userAuth:
+          - profile
+      responses:
+        '200':
+          description: User data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                Denis:
+                  value:
+                    username: arch15131434
+                    firstName: Denis
+                    lastName: Denisov
+                    email: archpe@1tr3221.com
+                    enabled: true
+        '401':
+          description: Not authenticated
+components:
+  schemas:
+    TokenRequest:
+      title: Token Request
+      type: object
+      properties:
+        username:
+          required: true
+          type: string
+        password:
+          required: true
+          type: string
+        clientId:
+          required: true
+          type: string
+        clientSecret:
+          required: true
+          type: string
+        scope:
+          type: string
+    User:
+      title: User
+      type: object
+      properties:
+        username:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        enabled:
+          type: boolean
+        credentials:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              value:
+                type: string
+              temporary:
+                type: boolean
+  securitySchemes:
+    adminAuth:
+      type: oauth2
+      description: Keycloak admin auth
+      flows:
+        password:
+          tokenUrl: http://arch.homework/otusapp/dzakharov/auth/admin/token
+          scopes:
+            profile: profile
+            email: email
+    userAuth:
+      type: oauth2
+      description: Keycloak admin auth
+      flows:
+        password:
+          tokenUrl: http://arch.homework/otusapp/dzakharov/auth/token
+
+
+  

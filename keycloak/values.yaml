@@ -1,0 +1,28 @@
+serviceMonitor:
+  enabled: true
+
+extraVolumes: |
+  - name: realm-secret
+    secret:
+      secretName: realm-secret
+
+extraVolumeMounts: |
+  - name: realm-secret
+    mountPath: "/realm/"
+    readOnly: true
+
+extraEnv: |
+  - name: KEYCLOAK_IMPORT
+    value: /realm/realm.json
+  - name: KEYCLOAK_USER
+    value: admin
+  - name: KEYCLOAK_PASSWORD
+    value: admin
+  - name: PROXY_ADDRESS_FORWARDING
+    value: "true"
+  - name: KEYCLOAK_LOGLEVEL
+    value: DEBUG
+  - name: ROOT_LOGLEVEL
+    value: DEBUG
+  - name: KEYCLOAK_FRONTEND_URL
+    value: http://arch.homework

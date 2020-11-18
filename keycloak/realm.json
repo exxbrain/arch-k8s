@@ -1,0 +1,19 @@
+{
+  "id" : "arch",
+  "realm" : "arch",
+  "registrationAllowed" : true,
+  "enabled": true,
+  "clients": [
+    {
+      "clientId": "arch",
+      "enabled": true,
+      "publicClient": true,
+      "redirectUris": [
+        "*"
+      ],
+      "webOrigins": [
+        "*"
+      ]
+    }
+  ]
+}
