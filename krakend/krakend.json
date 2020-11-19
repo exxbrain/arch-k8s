@@ -79,7 +79,6 @@
         {
           "url_pattern": "/auth/admin/realms/arch/users",
           "method": "POST",
-          "encoding": "no-op",
           "host": [
             "http://keycloak-http"
           ],
@@ -95,7 +94,7 @@
       "extra_config": {
         "github.com/devopsfaith/krakend-jose/validator": {
           "alg": "RS256",
-          "jwk-url": "http://keycloak-http/auth/realms/master/protocol/openid-connect/certs",
+          "jwk-url": "http://keycloak-http/auth/realms/arch/protocol/openid-connect/certs",
           "disable_jwk_security": true
         }
       },

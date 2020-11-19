@@ -8,12 +8,8 @@
       "clientId": "arch",
       "enabled": true,
       "publicClient": true,
-      "redirectUris": [
-        "*"
-      ],
-      "webOrigins": [
-        "*"
-      ]
+      "fullScopeAllowed": true,
+      "directAccessGrantsEnabled": true
     }
   ]
 }

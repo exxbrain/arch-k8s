@@ -18,5 +18,5 @@ helm install krakend krakend/krakend-chart -n=api-gateway
 ```shell script
 helm upgrade keycloak --values keycloak/values.yaml codecentric/keycloak -n=api-gateway
 kubectl config set-context --current --namespace=api-gateway
+kubectl port-forward service/keycloak-postgresql 5433:5432
 ```
-arch-realm
