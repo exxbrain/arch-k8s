@@ -6,56 +6,13 @@ info:
 servers:
   - url: 'http://arch.homework'
 paths:
-  /otusapp/dzakharov/auth/admin/token:
+  /otusapp/dzakharov/users/register:
     post:
       tags:
         - auth
-      summary: Get admin token
+      summary: Register new user
       requestBody:
-        description: Admin token
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/TokenRequest'
-            examples:
-              AdminTokenRequest:
-                value:
-                  username: admin
-                  password: admin
-                  scope: profile email
-                  client_id: admin-cli
-                  grant_type: password
-      responses:
-        '200':
-          description: Ok
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Token'
-              examples:
-                AdminToken:
-                  value:
-                    access_token: "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJsZV91R2FVcjJoaEVraXpxZkVoRnlqbktHRGdTcW9kMm1xWHlYdmdsRlQwIn0.eyJleHAiOjE2MDU3NjQ2NDUsImlhdCI6MTYwNTc2NDU4NSwianRpIjoiZDFmOTMyMDgtZTczYy00MWQ1LWE5MDUtZDUzNDhhZDkwNGM1IiwiaXNzIjoiaHR0cDovL2FyY2guaG9tZXdvcmsvcmVhbG1zL21hc3RlciIsInN1YiI6IjNkZmE0YThmLTA0NmEtNDI5NC1hOWQ1LTZjNDc2MDg5NDI1NiIsInR5cCI6IkJlYXJlciIsImF6cCI6ImFkbWluLWNsaSIsInNlc3Npb25fc3RhdGUiOiIwNzlmMWY1OS01YzE5LTQ3YTEtOGE3Yi1lZTk2MThiN2EyMzMiLCJhY3IiOiIxIiwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhZG1pbiJ9.RXhvtARYU8BvZfnGslw4kpK_rOo0nGUXGeyyo1jkLLWM361AcfdVWawslwVGvJKZJleolFxqDCywRweBDQWBmeGTTfyoTzxdEfZ9mPdFS8FGtuRhMWsptsK74SXLEzqs_fpj_m3r6wYqEcJ1zVlk4VJGHLEWiNHKZB2jsDinco2MdNlFPnDUNXvU8XmW9SiGDHjnVkZyWQERWWbcLh5b0KRSNDWaM2zIxVJ5DvEmqMpeXW5YTS5whzOnA81QtBT_z4JtWK_y-kAj2rkQ5_YEU-stip3rSnVNDuebTo130nR1zPokCTZUgS2yVezjwwFhIe_bwGngdkoDTp9sBqAYdQ"
-                    expires_in: 60
-                    not-before-policy: 0
-                    refresh_expires_in: 1800
-                    refresh_token: "eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI4NTg1MmE2ZS1mMjQ4LTQwOWQtOGJiYi03OTUyOTgxMWFlOTAifQ.eyJleHAiOjE2MDU3NjYzODUsImlhdCI6MTYwNTc2NDU4NSwianRpIjoiZmVlMzI1MzQtNGM5OS00MjRlLWJjMWQtZWU5NzM0N2NmNzg4IiwiaXNzIjoiaHR0cDovL2FyY2guaG9tZXdvcmsvcmVhbG1zL21hc3RlciIsImF1ZCI6Imh0dHA6Ly9hcmNoLmhvbWV3b3JrL3JlYWxtcy9tYXN0ZXIiLCJzdWIiOiIzZGZhNGE4Zi0wNDZhLTQyOTQtYTlkNS02YzQ3NjA4OTQyNTYiLCJ0eXAiOiJSZWZyZXNoIiwiYXpwIjoiYWRtaW4tY2xpIiwic2Vzc2lvbl9zdGF0ZSI6IjA3OWYxZjU5LTVjMTktNDdhMS04YTdiLWVlOTYxOGI3YTIzMyIsInNjb3BlIjoicHJvZmlsZSBlbWFpbCJ9.iFZ6lsV3Rr3U5VNhRNH-EWUT9uZPynS7lLWNWjzGupU"
-                    session_state: "079f1f59-5c19-47a1-8a7b-ee9618b7a233"
-                    token_type: "bearer"
-        '401':
-          description: Not authenticated
-  /otusapp/dzakharov/auth/register:
-    post:
-      tags:
-        - auth
-      summary: Create new user
-      security:
-        - bearerAuth:
-          - profile
-          - email
-      requestBody:
-        description: User to be created
+        description: User to be registered
         required: true
         content:
           application/json:
@@ -64,15 +21,11 @@ paths:
             examples:
               Denis:
                 value:
-                  username: arch15131434
+                  username: user{{$randomInt}}
                   firstName: Denis
                   lastName: Denisov
-                  email: archpe@1tr3221.com
-                  enabled: true
-                  credentials:
-                    - type: password
-                      value: password
-                      temporary: false
+                  email: user{{$randomInt}}@mail{{$randomInt}}.ru
+                  password: pwd
       responses:
         '201':
           description: Created
@@ -93,8 +46,8 @@ paths:
             examples:
               AdminTokenRequest:
                 value:
-                  username: arch15131434
-                  password: password
+                  username: {{username}}
+                  password: pwd
                   client_id: arch
                   grant_type: password
       responses:
@@ -135,11 +88,10 @@ paths:
               examples:
                 Denis:
                   value:
-                    username: arch15131434
+                    username: user{{$randomInt}}
                     firstName: Denis
                     lastName: Denisov
-                    email: archpe@1tr3221.com
-                    enabled: true
+                    email: user{{$randomInt}}@mail{{$randomInt}}.ru
         '401':
           description: Not authenticated
 components:
@@ -172,18 +124,14 @@ components:
       properties:
         username:
           type: string
-          required: true
         password:
           type: string
-          required: true
         scope:
           type: string
         client_id:
           type: string
-          required: true
         grant_type:
           type: string
-          required: true
     User:
       title: User
       type: object
@@ -198,39 +146,11 @@ components:
           type: string
         password:
           type: string
-        enabled:
-          type: boolean
-        credentials:
-          type: array
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-              value:
-                type: string
-              temporary:
-                type: boolean
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
-    adminAuth:
-      type: oauth2
-      description: Keycloak admin auth
-      flows:
-        password:
-          tokenUrl: http://arch.homework/otusapp/dzakharov/auth/admin/token
-          scopes:
-            profile: profile
-            email: email
-    userAuth:
-      type: oauth2
-      description: Keycloak admin auth
-      flows:
-        password:
-          tokenUrl: http://arch.homework/otusapp/dzakharov/auth/token
 
 
   

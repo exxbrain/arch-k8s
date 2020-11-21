@@ -11,17 +11,25 @@
     "github_com/devopsfaith/krakend-gologging": {
       "level": "DEBUG",
       "prefix": "[KRAKEND]",
-      "syslog": false,
+      "syslog": true,
       "stdout": true
+    },
+    "github_com/devopsfaith/krakend-opencensus": {
+      "exporters": {
+        "prometheus": {
+          "port": 9091,
+          "namespace": "monitoring"
+        }
+      }
     }
   },
   "endpoints": [
     {
-      "endpoint": "/auth/admin/token",
+      "endpoint": "/users/register",
       "method": "POST",
       "backend": [
         {
-          "url_pattern": "/auth/realms/master/protocol/openid-connect/token",
+          "url_pattern": "/auth/realms/arch/register",
           "method": "POST",
           "host": [
             "http://keycloak-http"
@@ -30,11 +38,11 @@
       ]
     },
     {
-      "endpoint": "/auth/token",
+      "endpoint": "/auth/{param1}",
       "method": "POST",
       "backend": [
         {
-          "url_pattern": "/auth/realms/arch/protocol/openid-connect/token",
+          "url_pattern": "/auth/realms/arch/protocol/openid-connect/{param1}",
           "method": "POST",
           "host": [
             "http://keycloak-http"
@@ -43,51 +51,7 @@
       ]
     },
     {
-      "endpoint": "/auth/.wellknown/jwks.json",
-      "method": "GET",
-      "backend": [
-        {
-          "url_pattern": "/auth/realms/arch/protocol/openid-connect/certs",
-          "method": "GET",
-          "host": [
-            "http://keycloak-http"
-          ]
-        }
-      ]
-    },
-    {
-      "endpoint": "/auth/logout",
-      "method": "POST",
-      "backend": [
-        {
-          "url_pattern": "/auth/realms/arch/",
-          "method": "POST",
-          "host": [
-            "http://keycloak-http"
-          ]
-        }
-      ]
-    },
-    {
-      "endpoint": "/auth/register",
-      "method": "POST",
-      "output_encoding": "no-op",
-      "headers_to_pass": [
-        "*"
-      ],
-      "backend": [
-        {
-          "url_pattern": "/auth/admin/realms/arch/users",
-          "method": "POST",
-          "host": [
-            "http://keycloak-http"
-          ],
-          "disable_host_sanitize": false
-        }
-      ]
-    },
-    {
-      "endpoint": "/profile/{param1}",
+      "endpoint": "/some-service/{param}",
       "headers_to_pass": [
         "*"
       ],
@@ -100,7 +64,7 @@
       },
       "backend": [
         {
-          "url_pattern": "/{param1}",
+          "url_pattern": "/me",
           "host": [
             "http://profile-service.app.svc.cluster.local:8080"
           ]

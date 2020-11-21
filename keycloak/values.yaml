@@ -1,3 +1,11 @@
+image:
+  # The Keycloak image repository
+  repository: exxbrain/keycloak
+  # Overrides the Keycloak image tag whose default is the chart version
+  tag: "1.5"
+  # The Keycloak image pull policy
+  pullPolicy: Never
+
 serviceMonitor:
   enabled: true
 
@@ -24,5 +32,3 @@ extraEnv: |
     value: DEBUG
   - name: ROOT_LOGLEVEL
     value: DEBUG
-  - name: KEYCLOAK_FRONTEND_URL
-    value: http://arch.homework
