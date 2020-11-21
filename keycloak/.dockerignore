@@ -1,0 +1,6 @@
+# Ignore everything
+**
+
+!registration-provider/
+registration-provider/build
+registration-provider/.gradle
