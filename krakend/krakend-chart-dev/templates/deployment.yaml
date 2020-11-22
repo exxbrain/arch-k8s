@@ -28,7 +28,7 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          image: "{{ .Values.image }}"
           imagePullPolicy: {{ .Values.imageConfig.pullPolicy }}
           command: [ "/usr/bin/krakend" ]
           args: [ "run", "-d", "-c", "/etc/krakend/krakend.json", "-p", "{{.Values.service.port}}" ]

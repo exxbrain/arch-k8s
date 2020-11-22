@@ -4,10 +4,9 @@ fullnameOverride: "krakend"
 
 image:
   name: exxbrain/arch-krakend
-  tag: latest
 
 imageConfig:
-  pullPolicy: IfNotPresent
+  pullPolicy: Never
 
 service:
   type: NodePort

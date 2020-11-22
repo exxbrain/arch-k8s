@@ -11,6 +11,6 @@ deploy:
     releases:
       - name: krakend
         namespace: api-gateway
-        chartPath: krakend-chart
+        chartPath: krakend-chart-dev
         artifactOverrides:
           image: exxbrain/arch-krakend

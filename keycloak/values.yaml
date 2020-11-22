@@ -1,6 +1,6 @@
 image:
-  name: exxbrain/arch-keycloak
-  tag: latest
+  repository: exxbrain/arch-keycloak
+  tag: "1.0"
   pullPolicy: IfNotPresent
 
 serviceMonitor:
