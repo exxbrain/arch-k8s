@@ -30,10 +30,12 @@
         "*"
       ],
       "method": "POST",
+      "output_encoding": "no-op",
       "backend": [
         {
           "url_pattern": "/auth/realms/arch/{param1}",
           "method": "POST",
+          "encoding": "no-op",
           "host": [
             "http://keycloak-http.identity.svc.cluster.local"
           ]
@@ -46,10 +48,12 @@
         "*"
       ],
       "method": "GET",
+      "output_encoding": "no-op",
       "backend": [
         {
           "url_pattern": "/auth/realms/arch/{param1}",
           "method": "GET",
+          "encoding": "no-op",
           "host": [
             "http://keycloak-http.identity.svc.cluster.local"
           ]
@@ -62,10 +66,12 @@
         "*"
       ],
       "method": "POST",
+      "output_encoding": "no-op",
       "backend": [
         {
           "url_pattern": "/auth/realms/arch/{param1}/{param2}/{param3}",
           "method": "POST",
+          "encoding": "no-op",
           "host": [
             "http://keycloak-http.identity.svc.cluster.local"
           ]
