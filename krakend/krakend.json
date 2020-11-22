@@ -25,11 +25,14 @@
   },
   "endpoints": [
     {
-      "endpoint": "/users/register",
+      "endpoint": "/auth/{param1}",
+      "headers_to_pass": [
+        "*"
+      ],
       "method": "POST",
       "backend": [
         {
-          "url_pattern": "/auth/realms/arch/register",
+          "url_pattern": "/auth/realms/arch/{param1}",
           "method": "POST",
           "host": [
             "http://keycloak-http"
@@ -39,10 +42,31 @@
     },
     {
       "endpoint": "/auth/{param1}",
+      "headers_to_pass": [
+        "*"
+      ],
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/auth/realms/arch/{param1}",
+          "method": "GET",
+          "encoding": "no-op",
+          "host": [
+            "http://keycloak-http.api-gateway.svc.cluster.local"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/auth/{param1}/{param2}/{param3}",
+      "headers_to_pass": [
+        "*"
+      ],
       "method": "POST",
       "backend": [
         {
-          "url_pattern": "/auth/realms/arch/protocol/openid-connect/{param1}",
+          "url_pattern": "/auth/realms/arch/{param1}/{param2}/{param3}",
           "method": "POST",
           "host": [
             "http://keycloak-http"

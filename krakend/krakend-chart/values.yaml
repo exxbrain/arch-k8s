@@ -3,7 +3,9 @@ replicaCount: 1
 fullnameOverride: "krakend"
 
 image:
-  name: exxbrain/krakend
+  name: exxbrain/arch-krakend
+
+imageConfig:
   pullPolicy: Never
 
 service:

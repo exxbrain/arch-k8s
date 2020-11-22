@@ -1,5 +1,7 @@
 package com.exxbrain.keycloak.registration;
 
+import java.util.List;
+
 public class UserToRegister {
 
     private String username;

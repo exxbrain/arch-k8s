@@ -2,5 +2,7 @@
 **
 
 !registration-provider/
+!profile.properties
 registration-provider/build
 registration-provider/.gradle
+!realm.json

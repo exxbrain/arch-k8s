@@ -2,14 +2,24 @@
   "id" : "arch",
   "realm" : "arch",
   "registrationAllowed" : true,
+  "sslRequired": "none",
   "enabled": true,
+  "attributes": {
+    "frontendUrl": "http://arch.homework"
+  },
   "clients": [
     {
       "clientId": "arch",
       "enabled": true,
       "publicClient": true,
       "fullScopeAllowed": true,
-      "directAccessGrantsEnabled": true
+      "directAccessGrantsEnabled": true,
+      "redirectUris": [
+        "*"
+      ],
+      "webOrigins": [
+        "*"
+      ]
     }
   ]
 }

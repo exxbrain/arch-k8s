@@ -2,6 +2,7 @@
 
 - [Extensions](https://www.keycloak.org/docs/latest/server_development/#_extensions)
 - [Providers](https://github.com/keycloak/keycloak/tree/master/examples/providers/rest)
+- [Account management](https://www.marcus-povey.co.uk/2020/10/12/using-the-keycloak-accounts-management-api/)
 - [Registration example](https://www.iditect.com/how-to/51709957.html)
 - [Keycloak Helm charts](https://github.com/codecentric/helm-charts/tree/master/charts/keycloak)
 - [Keycloak Docker](https://hub.docker.com/r/jboss/keycloak)

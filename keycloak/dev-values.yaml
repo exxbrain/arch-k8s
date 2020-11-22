@@ -1,9 +1,6 @@
-replicas: 2
+replicas: 1
 
-image:
-  name: exxbrain/arch-keycloak
-  tag: latest
-  pullPolicy: IfNotPresent
+imagePullPolicy: IfNotPresent
 
 serviceMonitor:
   enabled: true
@@ -21,5 +18,3 @@ extraEnv: |
     value: DEBUG
   - name: ROOT_LOGLEVEL
     value: DEBUG
-  - name: KEYCLOAK_FRONTEND_URL
-    value: http://arch.homework
