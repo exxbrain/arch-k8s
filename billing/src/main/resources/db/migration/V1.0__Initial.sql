@@ -1,0 +1,4 @@
+CREATE TABLE account (
+    user_id VARCHAR NOT NULL PRIMARY KEY,
+    balance NUMERIC NOT NULL
+);

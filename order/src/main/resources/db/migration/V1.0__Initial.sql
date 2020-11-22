@@ -1,0 +1,5 @@
+CREATE TABLE order (
+    id VARCHAR NOT NULL PRIMARY KEY,
+    user_id VARCHAR NOT NULL,
+    price NUMERIC NOT NULL
+);

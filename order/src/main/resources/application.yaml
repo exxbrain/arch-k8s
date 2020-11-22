@@ -1,0 +1,36 @@
+spring:
+  jpa:
+    database: postgresql
+    show-sql: true
+  application:
+    name: billing
+  datasource:
+    url: ${DATABASE_URI:jdbc:postgresql://localhost:5432/order}
+    password: 12345
+    username: postgres
+
+management:
+  metrics:
+    web:
+      server:
+        request:
+          autotime:
+            percentiles-histogram: true
+            percentiles: 0.5,0.95,0.99,1.0
+            enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+
+app:
+  version: ${VERSION:#app.version#}
+
+logging:
+  level:
+    org.springframework.transaction: trace
+
+server:
+  port: 9001
+  servlet:
+    context-path: /orders
