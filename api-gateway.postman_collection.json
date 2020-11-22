@@ -1,0 +1,595 @@
+{
+	"info": {
+		"_postman_id": "67e50eea-fdfb-4e48-9074-8504078d9de7",
+		"name": "api-gateway",
+		"description": "Homework for backend for frontends. Apigateway.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "otusapp/dzakharov",
+			"item": [
+				{
+					"name": "Register new user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b49db928-f9fa-4ef8-b08f-93330aef4323",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"username\", jsonData.username);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"user{{$randomInt}}\",\n    \"firstName\": \"Denis\",\n    \"lastName\": \"Denisov\",\n    \"email\": \"user{{$randomInt}}@mail{{$randomInt}}.ru\",\n    \"password\": \"pwd\"\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"user{{$randomInt}}\",\n    \"firstName\": \"Denis\",\n    \"lastName\": \"Denisov\",\n    \"email\": \"user{{$randomInt}}@mail{{$randomInt}}.ru\",\n    \"password\": \"pwd\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/otusapp/dzakharov/users/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"otusapp",
+										"dzakharov",
+										"users",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not authenticated",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"user{{$randomInt}}\",\n    \"firstName\": \"Denis\",\n    \"lastName\": \"Denisov\",\n    \"email\": \"user{{$randomInt}}@mail{{$randomInt}}.ru\",\n    \"password\": \"pwd\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/otusapp/dzakharov/users/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"otusapp",
+										"dzakharov",
+										"users",
+										"register"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Get token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "189fd9a3-531b-40ae-88f6-5172037d2805",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"accessToken\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "{{username}}"
+								},
+								{
+									"key": "password",
+									"value": "pwd"
+								},
+								{
+									"key": "client_id",
+									"value": "arch"
+								},
+								{
+									"key": "grant_type",
+									"value": "password"
+								}
+							],
+							"options": {
+								"urlencoded": {}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/protocol/openid-connect/token",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Ok",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "{\"[object Object]\":null}",
+											"description": {
+												"content": "",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "password",
+											"value": "pwd",
+											"description": {
+												"content": "",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "client_id",
+											"value": "arch",
+											"description": {
+												"content": "",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "grant_type",
+											"value": "password",
+											"description": {
+												"content": "",
+												"type": "text/plain"
+											}
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/otusapp/dzakharov/auth/token",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"otusapp",
+										"dzakharov",
+										"auth",
+										"token"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJsZV91R2FVcjJoaEVraXpxZkVoRnlqbktHRGdTcW9kMm1xWHlYdmdsRlQwIn0.eyJleHAiOjE2MDU3NjQ2NDUsImlhdCI6MTYwNTc2NDU4NSwianRpIjoiZDFmOTMyMDgtZTczYy00MWQ1LWE5MDUtZDUzNDhhZDkwNGM1IiwiaXNzIjoiaHR0cDovL2FyY2guaG9tZXdvcmsvcmVhbG1zL21hc3RlciIsInN1YiI6IjNkZmE0YThmLTA0NmEtNDI5NC1hOWQ1LTZjNDc2MDg5NDI1NiIsInR5cCI6IkJlYXJlciIsImF6cCI6ImFkbWluLWNsaSIsInNlc3Npb25fc3RhdGUiOiIwNzlmMWY1OS01YzE5LTQ3YTEtOGE3Yi1lZTk2MThiN2EyMzMiLCJhY3IiOiIxIiwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhZG1pbiJ9.RXhvtARYU8BvZfnGslw4kpK_rOo0nGUXGeyyo1jkLLWM361AcfdVWawslwVGvJKZJleolFxqDCywRweBDQWBmeGTTfyoTzxdEfZ9mPdFS8FGtuRhMWsptsK74SXLEzqs_fpj_m3r6wYqEcJ1zVlk4VJGHLEWiNHKZB2jsDinco2MdNlFPnDUNXvU8XmW9SiGDHjnVkZyWQERWWbcLh5b0KRSNDWaM2zIxVJ5DvEmqMpeXW5YTS5whzOnA81QtBT_z4JtWK_y-kAj2rkQ5_YEU-stip3rSnVNDuebTo130nR1zPokCTZUgS2yVezjwwFhIe_bwGngdkoDTp9sBqAYdQ\",\n \"expires_in\": 60,\n \"not-before-policy\": 0,\n \"refresh_expires_in\": 1800,\n \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI4NTg1MmE2ZS1mMjQ4LTQwOWQtOGJiYi03OTUyOTgxMWFlOTAifQ.eyJleHAiOjE2MDU3NjYzODUsImlhdCI6MTYwNTc2NDU4NSwianRpIjoiZmVlMzI1MzQtNGM5OS00MjRlLWJjMWQtZWU5NzM0N2NmNzg4IiwiaXNzIjoiaHR0cDovL2FyY2guaG9tZXdvcmsvcmVhbG1zL21hc3RlciIsImF1ZCI6Imh0dHA6Ly9hcmNoLmhvbWV3b3JrL3JlYWxtcy9tYXN0ZXIiLCJzdWIiOiIzZGZhNGE4Zi0wNDZhLTQyOTQtYTlkNS02YzQ3NjA4OTQyNTYiLCJ0eXAiOiJSZWZyZXNoIiwiYXpwIjoiYWRtaW4tY2xpIiwic2Vzc2lvbl9zdGF0ZSI6IjA3OWYxZjU5LTVjMTktNDdhMS04YTdiLWVlOTYxOGI3YTIzMyIsInNjb3BlIjoicHJvZmlsZSBlbWFpbCJ9.iFZ6lsV3Rr3U5VNhRNH-EWUT9uZPynS7lLWNWjzGupU\",\n \"scope\": \"profile email\",\n \"session_state\": \"079f1f59-5c19-47a1-8a7b-ee9618b7a233\",\n \"token_type\": \"bearer\"\n}"
+						},
+						{
+							"name": "Not authenticated",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "{\"[object Object]\":null}",
+											"description": {
+												"content": "",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "password",
+											"value": "pwd",
+											"description": {
+												"content": "",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "client_id",
+											"value": "arch",
+											"description": {
+												"content": "",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "grant_type",
+											"value": "password",
+											"description": {
+												"content": "",
+												"type": "text/plain"
+											}
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/otusapp/dzakharov/auth/token",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"otusapp",
+										"dzakharov",
+										"auth",
+										"token"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Get my profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/account",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"account"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Not authenticated",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: bearer",
+											"type": "text/plain"
+										},
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/otusapp/dzakharov/profile/me",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"otusapp",
+										"dzakharov",
+										"profile",
+										"me"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "User data",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: bearer",
+											"type": "text/plain"
+										},
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/otusapp/dzakharov/profile/me",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"otusapp",
+										"dzakharov",
+										"profile",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"username\": \"user{{$randomInt}}\",\n \"firstName\": \"Denis\",\n \"lastName\": \"Denisov\",\n \"email\": \"user{{$randomInt}}@mail{{$randomInt}}.ru\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update my profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Denis{{$randomInt}}\",\n    \"lastName\": \"Denisov{{$randomInt}}\",\n    \"email\": \"user{{$randomInt}}@mail{{$randomInt}}.ru\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/account",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"account"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Not authenticated",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: bearer",
+											"type": "text/plain"
+										},
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/otusapp/dzakharov/profile/me",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"otusapp",
+										"dzakharov",
+										"profile",
+										"me"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "User data",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: bearer",
+											"type": "text/plain"
+										},
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/otusapp/dzakharov/profile/me",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"otusapp",
+										"dzakharov",
+										"profile",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"username\": \"user{{$randomInt}}\",\n \"firstName\": \"Denis\",\n \"lastName\": \"Denisov\",\n \"email\": \"user{{$randomInt}}@mail{{$randomInt}}.ru\"\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "4000f76d-34bc-4d6b-bd5c-dcccb511d502",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "4108ec11-a057-4bc0-a88a-35c384a76212",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "00983083-98e1-4ec4-b0c9-cc92f844ae70",
+			"key": "baseUrl",
+			"value": "http://arch.homework/otusapp/dzakharov/auth"
+		},
+		{
+			"id": "ffae0e34-198e-4c91-9391-d2216a3a8870",
+			"key": "username",
+			"value": ""
+		},
+		{
+			"id": "248daa71-0bd9-497c-9d16-8b298554ba3a",
+			"key": "accessToken",
+			"value": ""
+		},
+		{
+			"id": "32f6367e-7b7f-4bf7-8aa3-2852cb8ca199",
+			"key": "loclhostBaseUrl",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}

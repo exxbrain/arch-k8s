@@ -10,7 +10,7 @@ deploy:
   helm:
     releases:
       - name: keycloak
-        namespace: api-gateway
+        namespace: identity
         chartPath: dev-charts
         valuesFiles:
           - dev-values.yaml
