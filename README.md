@@ -29,6 +29,8 @@ kubectl create namespace identity
 
 helm install keycloak --values keycloak/values.yaml codecentric/keycloak -n=identity --atomic
 helm install krakend krakend/krakend-chart -n=api-gateway --atomic
+
+newman run api-gateway.postman_collection.json 
 ```
 
 ## Other
