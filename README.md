@@ -1,6 +1,10 @@
 ## Start services
 
-Prometheus 
+## Prepare 
+
+It is not necessary if you allready have prometheus and codecentric repository installed.
+
+### Prometheus 
 
 ```shell script
 kubectl create namespace monitoring
@@ -10,12 +14,14 @@ helm repo update
 helm install prom prometheus-community/kube-prometheus-stack -f prometheus/prometheus.yaml --atomic --namespace=monitoring
 ```
 
-Codecentric
+### Codecentric
 
 ```shell script
 helm repo add codecentric https://codecentric.github.io/helm-charts
 helm repo update
 ```
+
+## Run
 
 ```shell script
 kubectl create namespace api-gateway
@@ -25,6 +31,7 @@ helm install keycloak --values keycloak/values.yaml codecentric/keycloak -n=iden
 helm install krakend krakend/krakend-chart -n=api-gateway --atomic
 ```
 
+## Other
 
 ```shell script
 helm repo add codecentric https://codecentric.github.io/helm-charts
