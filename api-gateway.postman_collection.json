@@ -685,6 +685,130 @@
 							"body": "{\n \"username\": \"user{{$randomInt}}\",\n \"firstName\": \"Denis\",\n \"lastName\": \"Denisov\",\n \"email\": \"user{{$randomInt}}@mail{{$randomInt}}.ru\"\n}"
 						}
 					]
+				},
+				{
+					"name": "Get my profile check",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "76de4f6c-b4f2-4d21-8f39-3ceded87a187",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/account",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"account"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Not authenticated",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: bearer",
+											"type": "text/plain"
+										},
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/otusapp/dzakharov/profile/me",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"otusapp",
+										"dzakharov",
+										"profile",
+										"me"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "User data",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: bearer",
+											"type": "text/plain"
+										},
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/otusapp/dzakharov/profile/me",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"otusapp",
+										"dzakharov",
+										"profile",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"username\": \"user{{$randomInt}}\",\n \"firstName\": \"Denis\",\n \"lastName\": \"Denisov\",\n \"email\": \"user{{$randomInt}}@mail{{$randomInt}}.ru\"\n}"
+						}
+					]
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -715,22 +839,22 @@
 	],
 	"variable": [
 		{
-			"id": "c176fa49-95b3-4c5a-a615-da8e18bea26a",
+			"id": "4107b822-4bc7-4984-acaf-5f117a4771f7",
 			"key": "baseUrl",
 			"value": "http://arch.homework/otusapp/dzakharov/auth"
 		},
 		{
-			"id": "75a0e78e-cd0d-4710-a7c4-c85c0b45c387",
+			"id": "dada8685-ee28-4b8a-8214-fd116fd4d68a",
 			"key": "username",
 			"value": ""
 		},
 		{
-			"id": "8b3bd140-9f11-438e-b7c5-202006f08519",
+			"id": "693ea72c-348b-43d2-bba9-ce18da4bd3b5",
 			"key": "accessToken",
 			"value": ""
 		},
 		{
-			"id": "fa8474d9-b724-47b5-af8b-4c1923bd16e9",
+			"id": "3beaad9f-3d91-493b-b409-d6b1f5b60e10",
 			"key": "loclhostBaseUrl",
 			"value": ""
 		}
